@@ -264,7 +264,7 @@ public class AndroidWifiModule extends ReactContextBaseJavaModule {
 
 		// Use the existing network config if exists
 		for (WifiConfiguration wifiConfig : mWifiConfigList) {
-			if (wifiConfig.SSID.equals(conf.SSID)) {
+			if (wifiConfig.SSID!=null&&wifiConfig.SSID.equals(conf.SSID)) {
         		conf=wifiConfig;
 				updateNetwork=conf.networkId;
 			}
@@ -332,7 +332,7 @@ public class AndroidWifiModule extends ReactContextBaseJavaModule {
 
 		// check if network config exists and it's hidden
 		for (WifiConfiguration wifiConfig : list) {
-			if (wifiConfig.SSID.equals("\"" + ssid + "\"") && wifiConfig.hiddenSSID) {
+			if (wifiConfig.SSID!=null&&wifiConfig.SSID.equals("\"" + ssid + "\"") && wifiConfig.hiddenSSID) {
 				updateNetwork = wifiConfig.networkId;
 			}
 		}
@@ -437,7 +437,7 @@ public class AndroidWifiModule extends ReactContextBaseJavaModule {
 
 	    for (WifiConfiguration wifiConfig : mWifiConfigList) {
 			String comparableSSID = ('"' + ssid + '"'); //Add quotes because wifiConfig.SSID has them
-			if(wifiConfig.SSID.equals(comparableSSID)) {
+			if(wifiConfig.SSID!=null&&wifiConfig.SSID.equals(comparableSSID)) {
 				wifi.removeNetwork(wifiConfig.networkId);
 				wifi.saveConfiguration();
 				callback.invoke(true);
@@ -485,7 +485,7 @@ public class AndroidWifiModule extends ReactContextBaseJavaModule {
 		}
 
 		for (WifiConfiguration existingConfig : existingConfigs) {
-			if (existingConfig.SSID.equals("\"" + SSID + "\"")) {
+			if (existingConfig.SSID!=null&&existingConfig.SSID.equals("\"" + SSID + "\"")) {
 				return existingConfig;
 			}
 		}
